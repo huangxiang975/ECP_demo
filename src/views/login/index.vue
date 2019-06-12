@@ -42,7 +42,7 @@
       dd.ready(() => {
         dd.runtime.permission
           .requestAuthCode({
-            corpId: "ding0f2ae4da768e493235c2f4657eb6378f"
+            corpId: process.env.VUE_APP_CORPID
           })
           .then(res => {
             let _code: String = res.code;
