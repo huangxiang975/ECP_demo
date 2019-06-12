@@ -1,0 +1,22 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="28" height="28" viewBox="0 0 28 28">
+  <defs>
+    <clipPath id="clip-path">
+      <path id="路径_2" data-name="路径 2" d="M0,27.577H16.567V0H0Z" fill="#d9d9d9"/>
+    </clipPath>
+  </defs>
+  <g id="箭头" transform="translate(48 96) rotate(180)">
+    <g id="组_4" data-name="组 4" transform="translate(36.567 95.577) rotate(180)">
+      <g id="组_3" data-name="组 3" transform="translate(0 0)" clip-path="url(#clip-path)">
+        <g id="组_2" data-name="组 2" transform="translate(0 0.002)">
+          <path id="路径_1" data-name="路径 1" d="M.4,2.349A1.382,1.382,0,0,1,2.247.3L16.063,12.739a1.382,1.382,0,0,1,0,2.045L2.247,27.219A1.382,1.382,0,0,1,.4,25.174L13.079,13.762Z" transform="translate(0 0)" fill="#d9d9d9"/>
+        </g>
+      </g>
+    </g>
+    <g id="组_143" data-name="组 143" transform="translate(20 68)">
+      <g id="矩形_10" data-name="矩形 10" fill="#d9d9d9" stroke="#707070" stroke-width="1" opacity="0">
+        <rect width="28" height="28" stroke="none"/>
+        <rect x="0.5" y="0.5" width="27" height="27" fill="none"/>
+      </g>
+    </g>
+  </g>
+</svg>

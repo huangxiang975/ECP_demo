@@ -1,0 +1,17 @@
+<svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="26" height="26" viewBox="0 0 26 26">
+  <defs>
+    <clipPath id="clip-path">
+      <rect id="矩形_80" data-name="矩形 80" width="25.164" height="26" fill="#aaa"/>
+    </clipPath>
+  </defs>
+  <g id="筛选" transform="translate(369 -961)">
+    <rect id="矩形_86" data-name="矩形 86" width="26" height="26" transform="translate(-369 961)" fill="#fff" opacity="0"/>
+    <g id="组_218" data-name="组 218" transform="translate(-516 1032)">
+      <g id="组_217" data-name="组 217" transform="translate(147 -71)">
+        <g id="组_216" data-name="组 216" clip-path="url(#clip-path)">
+          <path id="路径_48" data-name="路径 48" d="M161.392-46.39V-57.373a1.324,1.324,0,0,1,.194-.568l7.643-10.6H149.782l7.643,10.6a1.324,1.324,0,0,1,.194.568v8.143Zm1.935,0a1.92,1.92,0,0,1-1.935,1.894,1.886,1.886,0,0,1-1.161-.379L155.974-48a.855.855,0,0,1-.387-.758v-8.332l-8.513-11.836a.93.93,0,0,1-.091-.992.97.97,0,0,1,.865-.523h23.219a.945.945,0,0,1,.774,1.515l-8.514,11.836Zm0,0" transform="translate(-146.885 70.461)" fill="#aaa"/>
+        </g>
+      </g>
+    </g>
+  </g>
+</svg>
