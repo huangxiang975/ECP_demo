@@ -52,7 +52,7 @@
     font-size: 0;
     .h-cell-tt,
     .h-cell-value {
-      flex: 1;
+      flex: 1; max-width: 50%;
       line-height: 1rem;
       font-size: 0.32rem;
       color: #333;

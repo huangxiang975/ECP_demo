@@ -1,13 +1,13 @@
 <!--  -->
 <template>
-  <div class='h-cell-wrapper'>
+  <div class='h-cell-wrapper'
+       @click.stop="clickSelect">
     <div class="h-cell-tt ellipsis">
       <span>{{cellData.labelname || 下拉筛选}}</span>
       <span class="star"
             v-if="isStar">*</span>
     </div>
-    <div class="h-cell-value ellipsis tr"
-         @click="clickSelect">
+    <div class="h-cell-value ellipsis tr">
       <div class="placeholder box-b ellipsis"
            :class="{'arrows':!isReadOnly}"
            v-if="valName">
@@ -112,7 +112,7 @@
     }
     .h-cell-tt,
     .h-cell-value {
-      flex: 1;
+      flex: 1; max-width: 50%;
       line-height: 1rem;
       font-size: 0.32rem;
       color: #333;

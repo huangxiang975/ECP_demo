@@ -52,7 +52,6 @@
         this.val = "";
       }
       this.$emit("change", this.val);
-      console.log(12);
     }
   }
 </script>
@@ -67,6 +66,7 @@
     .h-cell-tt,
     .h-cell-value {
       flex: 1;
+      max-width: 50%;
       line-height: 1rem;
       font-size: 0.32rem;
       color: #333;

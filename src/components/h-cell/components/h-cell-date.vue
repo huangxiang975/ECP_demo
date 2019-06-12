@@ -1,13 +1,13 @@
 <!-- 日期选择 -->
 <template>
-  <div class='h-cell-wrapper'>
+  <div class='h-cell-wrapper'
+       @click.stop="clickDateShow">
     <div class="h-cell-tt ellipsis">
       <span>{{cellData.labelname || 日期选择}}</span>
       <span class="star"
             v-if="isStar">*</span>
     </div>
-    <div class="h-cell-value ellipsis tr"
-         @click="clickDateShow">
+    <div class="h-cell-value ellipsis tr">
       <div class="placeholder box-b"
            :class="{'arrows':!isReadOnly}"
            v-if="value">
@@ -71,7 +71,7 @@
     }
     .h-cell-tt,
     .h-cell-value {
-      flex: 1;
+      flex: 1; max-width: 50%;
       line-height: 1rem;
       font-size: 0.32rem;
       color: #333;

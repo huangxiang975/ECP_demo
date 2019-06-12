@@ -1,26 +1,29 @@
 <!--  -->
 <template>
-  <div class='h-cell-wrapper'>
-    <div class="h-cell-tt ellipsis">
-      <span>{{cellData.formfield.labelname || 多选}}</span>
-      <span class="star"
-            v-if="isStar">*</span>
-    </div>
-    <div class="h-cell-value tr"
-         @click="clickOpen">
-      <div class="placeholder box-b"
-           :class="{'arrows':!isReadOnly}"
-           v-if="valName">
-        {{valName}}
+  <div>
+    <div class='h-cell-wrapper'
+         @click.stop="clickOpen">
+      <div class="h-cell-tt ellipsis">
+        <span>{{cellData.formfield.labelname || 多选}}</span>
+        <span class="star"
+              v-if="isStar">*</span>
       </div>
-      <div class="placeholder arrows box-b placeholder-color"
-           v-if="!valName && !isReadOnly">请选择</div>
+      <div class="h-cell-value tr">
+        <div class="placeholder box-b"
+             :class="{'arrows':!isReadOnly}"
+             v-if="valName">
+          {{valName}}
+        </div>
+        <div class="placeholder arrows box-b placeholder-color"
+             v-if="!valName && !isReadOnly">请选择</div>
+      </div>
     </div>
     <h-dialog-radio v-if="dialogShow"
                     :isDialogShow.sync="dialogShow"
                     :id="cellData.formfield.datatype"
                     :valueStr="val"
-                    @returnDialog="returnDialog"></h-dialog-radio>
+                    @returnDialog="returnDialog">
+    </h-dialog-radio>
   </div>
 </template>
 
@@ -122,7 +125,7 @@
     }
     .h-cell-tt,
     .h-cell-value {
-      flex: 1;
+      flex: 1; max-width: 50%;
       line-height: 1rem;
       font-size: 0.32rem;
       color: #333;

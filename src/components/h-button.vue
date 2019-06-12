@@ -13,9 +13,7 @@
   @Component
   export default class Page extends Vue {
     @Emit("ReturnType")
-    clickBtn(i) {
-      // this.$emit("ReturnType", i);
-    }
+    clickBtn(i) {}
   }
 </script>
 
