@@ -2,7 +2,7 @@ module.exports = {
   devServer: {
     proxy: {
       '/': {
-        target: 'http://47.110.250.181:8083/',
+        target: process.env.VUE_APP_TAEGET,
         ws: false,
         changeOrigin: true,
         pathRewrite: {
