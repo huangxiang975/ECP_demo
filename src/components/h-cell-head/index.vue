@@ -71,6 +71,12 @@
                :cellData="cellData"
                :isReadOnly="isReadOnly"
                :isStar="isStar"></h-file-up>
+    <h-cell-department v-else-if="type == 12"
+                       v-model="val"
+                       @change="$emit('change',val)"
+                       :cellData="cellData"
+                       :isReadOnly="isReadOnly"
+                       :isStar="isStar"></h-cell-department>
   </div>
 </template>
 
@@ -88,6 +94,7 @@
   import hCellPageRadio from "./components/h-cell-page-radio.vue";
   import hCellPageCheckbox from "./components/h-cell-page-checkbox.vue";
   import hFileUp from "@/components/fileUp.vue";
+  import hCellDepartment from "./components/h-cell-department.vue";
   @Component({
     components: {
       hCellText,
@@ -101,7 +108,8 @@
       hCellSwitch,
       hCellPageRadio,
       hCellPageCheckbox,
-      hFileUp
+      hFileUp,
+      hCellDepartment
     }
   })
   export default class Page extends Vue {
@@ -118,6 +126,7 @@
      * 9.分页单选
      * 10.分页多选
      * 11.附件上传
+     * 12.部门树形选择器
      * */
     // @Prop({ type: Number, required: true, default: 1 })
     // type: Number;
@@ -212,7 +221,14 @@
           break;
 
         case 6: // 关联选择  多选单选
-          _type = this.cellData.formfield.bemulti == "1" ? 10 : 9;
+          if (
+            this.cellData.formfield.datatype == 6 ||
+            this.cellData.formfield.datatype == 11
+          ) {
+            _type = 12;
+          } else {
+            _type = this.cellData.formfield.bemulti == "1" ? 10 : 9;
+          }
           break;
 
         case 7: //附件上传

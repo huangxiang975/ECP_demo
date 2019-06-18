@@ -6,7 +6,6 @@ import store from "@/store/index";
 
 // create an axios instance
 const service = axios.create({
-  // baseURL: "http://47.110.250.181:8082/",
   baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 50 * 1000
   // headers: {
