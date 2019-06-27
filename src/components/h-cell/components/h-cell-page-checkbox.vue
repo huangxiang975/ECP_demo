@@ -51,7 +51,7 @@
 
     @Model("change", { type: String })
     value: any;
-    val: string = "";
+    val: any = this.value;
     valName: string = "";
 
     @Watch("value")

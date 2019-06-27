@@ -1,4 +1,5 @@
 // 请求拦截器
+
 import axios from "axios";
 import { MessageBox } from "mint-ui";
 import router from "@/router/index";
@@ -52,11 +53,7 @@ service.interceptors.response.use(
     return res;
   },
   error => {
-    if (error) {
-      MessageBox(`错误原因`, `${error}`);
-    } else {
-    MessageBox(`错误原因`, `无返回值!`);
-    }
+    MessageBox(`错误原因`, `操作异常,请联系管理员!`);
     return Promise.reject(error);
   }
 );

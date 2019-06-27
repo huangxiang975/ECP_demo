@@ -7,13 +7,23 @@
       {{cellData.formfield.labelname || 添加附件}}
     </div>
     <div class="file-main">
-      <!-- <div class="img-list dp-ib p-r"
-           v-for="(item, index) in imgData"
-           :key="index"> -->
-      <!-- <div class="img-del p-b"
-             @click="img_del_click(index)"></div> -->
-      <!-- <img :src="item.url">
-      </div> -->
+      <div class="file-list-box"
+           v-for="(item ,index) in fileData"
+           :key="index">
+        <div class="file-list box-b">
+          <img :src="item.url"
+               v-if="calculateIsImg(item.objname)"
+               @click="clickImg(item.url)"
+               class="file-list-img fl">
+          <img src="@/assets/img/file-img.svg"
+               v-else
+               class="file-list-img fl">
+          <div class="img-describe">
+            <div class="name ellipsis">{{item.objname}}</div>
+            <div class="time ellipsis">{{item.createtime}}</div>
+          </div>
+        </div>
+      </div>
       <label for="fileupload"
              v-show="!isReadOnly"
              class="picture-label">
@@ -37,7 +47,9 @@
 
 <script lang='ts'>
   import { Component, Vue, Prop, Emit, Model } from "vue-property-decorator";
-  import { getFileUp } from "@/api/sundry";
+  import { getFileUp, getFileData } from "@/api/sundry";
+  import * as dd from "dingtalk-jsapi";
+
   @Component
   export default class Page extends Vue {
     @Prop({ type: Object, required: true }) cellData: any;
@@ -47,6 +59,7 @@
     value: string;
     val: string = this.value || "";
 
+    fileData: any[] = [];
     // imgData:any = {}
 
     addImg(event) {
@@ -75,6 +88,7 @@
             this.val = this.val + "," + _data;
           }
           this.$emit("change", this.val);
+          this.getFileData();
         } else {
           this.$toast("附件上传失败!");
         }
@@ -83,6 +97,43 @@
         // let _file_dom: any = document.getElementById("fileupload");
         // _file_dom.value = "";
       });
+    }
+
+    calculateIsImg(n) {
+      let name = n,
+        regular = /\.txt|\.jpg|\.svg/;
+      if (regular.test(name)) {
+        return true;
+      } else {
+        return false;
+      }
+    }
+
+    getFileData() {
+      if (!this.val) {
+        return false;
+      }
+      getFileData(this.val)
+        .then(res => {
+          let data: any[] = res.data;
+          this.fileData = data;
+        })
+        .catch(err => {
+          console.log(err);
+        });
+    }
+
+    clickImg(url) {
+      dd.ready(() => {
+        dd.biz.util.previewImage({
+          urls: [url], //图片地址列表
+          current: url //当前显示的图片链接
+        });
+      });
+    }
+
+    created() {
+      this.getFileData();
     }
 
     // addImg(event) {
@@ -124,6 +175,30 @@
     }
     .file-main {
       padding: 0.2rem 0;
+      .file-list-box {
+        padding: 0.12rem 0;
+        .file-list {
+          height: 0.7rem;
+          .file-list-img {
+            height: 0.7rem;
+            width: 0.7rem;
+          }
+          .img-describe {
+            margin-left: 1rem;
+            height: 0.7rem;
+            .name {
+              line-height: 0.4rem;
+              font-size: 0.28rem;
+              color: #333;
+            }
+            .time {
+              line-height: 0.3rem;
+              font-size: 0.22rem;
+              color: #999;
+            }
+          }
+        }
+      }
       .img-list {
         width: 0.9rem;
         height: 0.9rem;

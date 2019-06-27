@@ -25,6 +25,7 @@
           </div>
         </div>
       </div>
+      <approver :processId="processId"></approver>
     </main>
     <bottom-btn v-show="isBtnBoxShow"
                 :isCancelShow="isCancelShow"
@@ -43,6 +44,7 @@
   import fileUp from "@/components/fileUp.vue";
   import hExamine from "@/components/examine.vue";
   import ecpUtils from "@/utils/ecpUtils";
+  import approver from "./components/approver.vue";
   import bottomBtn from "./components/bottom-btn.vue";
   import hOpinion from "./components/h-opinion.vue";
 
@@ -54,12 +56,13 @@
       hCellHead,
       fileUp,
       hExamine,
+      approver,
       bottomBtn,
       hOpinion
     }
   })
   export default class Page extends Vue {
-    routerQueryId: string | string[] = "";
+    processId: string | string[] = "";
     /** 页面配置数据 */
     pageData: any = {};
 
@@ -83,7 +86,6 @@
       getBillsDetails(id).then(res => {
         let data: any = res.data;
         this.detailsData = data;
-        console.log(data);
         dd.ready(() => {
           dd.biz.navigation.setTitle({
             title: data.result.objname
@@ -121,14 +123,14 @@
 
     getSubmit() {
       let params = {
-        processid: this.routerQueryId, //当前退回的流程主键
+        processid: this.processId, //当前退回的流程主键
         remark: this.opinionData.value, //当前退回的审批意见
         datas: this.form
       };
       getSubmit(params).then(res => {
         if (res.data == 1) {
           this.$toast("已同意该单据!");
-          this.loadBillsData(this.routerQueryId);
+          this.loadBillsData(this.processId);
         } else {
           this.$toast("保存失败");
         }
@@ -137,16 +139,15 @@
 
     getBack() {
       let params = {
-        processid: this.routerQueryId, //当前退回的流程主键
+        processid: this.processId, //当前退回的流程主键
         remark: this.opinionData.value, //当前退回的审批意见
         rejecttonode: this.detailsData.rejecttonode.id, //当前退回的节点
         datas: this.form
       }; //当前提交流程参数信息};
       getBack(params).then(res => {
-        console.log(res);
         if (res.data == 1) {
           this.$toast("已拒绝该单据!");
-          this.loadBillsData(this.routerQueryId);
+          this.loadBillsData(this.processId);
         } else {
           this.$toast("保存失败");
         }
@@ -248,9 +249,9 @@
     }
 
     created() {
-      this.routerQueryId = this.$route.query.id;
-      if (this.routerQueryId) {
-        this.loadBillsData(this.routerQueryId);
+      this.processId = this.$route.query.id;
+      if (this.processId) {
+        this.loadBillsData(this.processId);
       } else {
         this.$toast("数据错误,请返回重试!");
       }

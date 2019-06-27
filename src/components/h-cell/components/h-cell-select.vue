@@ -85,7 +85,7 @@
       if (this.value) {
         let data = {
           type: "selected",
-          typeid: this.cellData.formfield.datatype,
+          typeid: this.cellData.datatype,
           ids: this.value
         };
         getSelectedName(data).then(res => {
@@ -112,7 +112,8 @@
     }
     .h-cell-tt,
     .h-cell-value {
-      flex: 1; max-width: 50%;
+      flex: 1;
+      max-width: 50%;
       line-height: 1rem;
       font-size: 0.32rem;
       color: #333;

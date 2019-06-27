@@ -32,7 +32,7 @@
 
     @Model("change", { type: String })
     value: string;
-    val: string = "";
+    val: any = this.value;
 
     @Watch("value")
     onValueChange() {

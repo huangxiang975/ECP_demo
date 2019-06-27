@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="66" height="66" viewBox="0 0 66 66">
+  <g id="省略号" transform="translate(-520 -1840)">
+    <g id="椭圆_52" data-name="椭圆 52" transform="translate(520 1840)" fill="none" stroke="#3396fb" stroke-width="2" stroke-dasharray="3">
+      <circle cx="33" cy="33" r="33" stroke="none"/>
+      <circle cx="33" cy="33" r="32" fill="none"/>
+    </g>
+    <g id="组_1026" data-name="组 1026" transform="translate(1 1)">
+      <circle id="椭圆_53" data-name="椭圆 53" cx="2.5" cy="2.5" r="2.5" transform="translate(539 1870)" fill="#3396fb"/>
+      <circle id="椭圆_54" data-name="椭圆 54" cx="2.5" cy="2.5" r="2.5" transform="translate(550 1870)" fill="#3396fb"/>
+      <circle id="椭圆_55" data-name="椭圆 55" cx="2.5" cy="2.5" r="2.5" transform="translate(561 1870)" fill="#3396fb"/>
+    </g>
+  </g>
+</svg>

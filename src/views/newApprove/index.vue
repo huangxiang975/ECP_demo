@@ -176,6 +176,8 @@
       }
 
       getSave(this.form, this.pageData.dowid).then(res => {
+        console.log(res);
+
         let data: any = res.data;
         if (data.success) {
           this.$toast("保存成功!");

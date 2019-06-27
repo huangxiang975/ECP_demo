@@ -35,3 +35,11 @@ export function getSubmit(data) {
     params: data
   });
 }
+
+// 历史审批流程
+export function getApprover(id) {
+  return request({
+    url: `/ext/dd.WfprocessLog?processid=${id}`,
+    method: "GET",
+  });
+}
