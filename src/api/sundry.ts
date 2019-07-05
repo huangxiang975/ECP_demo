@@ -35,6 +35,17 @@ export function getFileData(ids) {
   });
 }
 
+/** 附件下载 */
+export function getFileDl(url) {
+  return request({
+    url,
+    method: "GET",
+    headers: {
+      "responseType": "arraybuffer"
+    }
+  });
+}
+
 /** 根据id获取name 下拉 浏览框使用 */
 export function getSelectedName(data) {
   return request({
@@ -47,3 +58,5 @@ export function getSelectedName(data) {
     method: "GET"
   });
 }
+
+

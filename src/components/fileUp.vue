@@ -19,7 +19,8 @@
                v-else
                class="file-list-img fl">
           <div class="img-describe">
-            <div class="name ellipsis">{{item.objname}}</div>
+            <div @click="fileDl(item.url,item.objname)"
+                 class="name ellipsis">{{item.objname}}</div>
             <div class="time ellipsis">{{item.createtime}}</div>
           </div>
         </div>
@@ -47,7 +48,7 @@
 
 <script lang='ts'>
   import { Component, Vue, Prop, Emit, Model } from "vue-property-decorator";
-  import { getFileUp, getFileData } from "@/api/sundry";
+  import { getFileUp, getFileData, getFileDl } from "@/api/sundry";
   import * as dd from "dingtalk-jsapi";
 
   @Component
@@ -101,12 +102,25 @@
 
     calculateIsImg(n) {
       let name = n,
-        regular = /\.txt|\.jpg|\.svg/;
+        regular = /\.jpg|\.svg|\.png/;
       if (regular.test(name)) {
         return true;
       } else {
         return false;
       }
+    }
+
+    /** 附件下载 */
+    fileDl(url, name) {
+      window.open(url);
+
+      // getFileDl(url)
+      //   .then(res => {
+      //     console.log(res);
+      //   })
+      //   .catch(err => {
+      //     console.log(err);
+      //   });
     }
 
     getFileData() {
