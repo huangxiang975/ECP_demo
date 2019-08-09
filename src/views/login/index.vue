@@ -10,6 +10,7 @@
 
   @Component({})
   export default class login extends Vue {
+    /** 通过code获取token */
     loadToken(code) {
       getToken(code)
         .then((res: any) => {
@@ -37,8 +38,11 @@
           this.$indicator.close();
         });
     }
+
+    /** 获取code */
     loadCode() {
       this.$indicator.open("身份验证中...");
+
       dd.ready(() => {
         dd.runtime.permission
           .requestAuthCode({

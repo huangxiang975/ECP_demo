@@ -96,6 +96,7 @@
       });
     }
 
+    /** 获取app列表 */
     getAppList() {
       getAppLists()
         .then(res => {
@@ -155,16 +156,18 @@
         color: #333;
       }
       .content {
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr 1fr;
         .app-list {
           padding: 0.5rem 0;
-          width: 24.5%;
           .img {
             width: 0.9rem;
             height: 0.9rem;
             margin: 0 auto;
+            font-size: 0;
           }
           .name {
-            padding-top: 0.28rem;
+            padding: 0.28rem 0.3rem 0;
             font-size: 0.3rem;
             color: #333;
           }

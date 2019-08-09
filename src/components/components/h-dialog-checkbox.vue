@@ -141,7 +141,7 @@
     left: 0;
     z-index: 99999;
     .h-dialog-main {
-      height: calc(100% - 1rem);
+      height: calc(100% - 1.7rem);
       .on-list {
         background-color: #ccc;
       }
