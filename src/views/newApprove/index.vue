@@ -25,8 +25,6 @@
         </div>
         <h-add-list @clickAddList="clickAddList(list.slaveid)"></h-add-list>
       </div>
-      <!-- <h-examine></h-examine> -->
-
     </main>
     <h-submit @returnCubmit="returnCubmit"></h-submit>
   </div>
@@ -36,7 +34,6 @@
   import { Component, Vue } from "vue-property-decorator";
   import hCell from "@/components/h-cell/index.vue";
   import hCellHead from "@/components/h-cell-head/index.vue";
-  import fileUp from "@/components/fileUp.vue";
   import hExamine from "@/components/examine.vue";
   import hSubmit from "@/components/submit.vue";
   import hAddList from "./components/add-list.vue";
@@ -47,7 +44,6 @@
     components: {
       hCell,
       hCellHead,
-      fileUp,
       hExamine,
       hSubmit,
       hAddList
@@ -176,12 +172,10 @@
       }
 
       getSave(this.form, this.pageData.dowid).then(res => {
-        console.log(res);
-
         let data: any = res.data;
         if (data.success) {
           this.$toast("保存成功!");
-          this.$router.back();
+          this.$router.replace("/bills-list?status=0");
         } else {
           this.$toast("保存失败,请检查内容!");
         }

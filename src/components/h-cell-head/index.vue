@@ -87,7 +87,8 @@
   import hCellSwitch from "./components/h-cell-switch.vue";
   import hCellPageRadio from "./components/h-cell-page-radio.vue";
   import hCellPageCheckbox from "./components/h-cell-page-checkbox.vue";
-  import hFileUp from "@/components/fileUp.vue";
+  import hFileUp from "@/components/h-file-up/index.vue";
+
   @Component({
     components: {
       hCellText,

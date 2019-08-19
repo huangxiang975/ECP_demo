@@ -1,4 +1,4 @@
-<!-- 图片上传组件 -->
+<!-- 图片上传组件 单附件上传 绑定值为id -->
 <template>
   <div class='file-box bgc-fff'>
     <div class="file-title">
@@ -11,6 +11,10 @@
            v-for="(item ,index) in fileData"
            :key="index">
         <div class="file-list box-b">
+          <div class="btn-box fr"
+               @click="clickFileDel(index)">
+            <img src="@/assets/img/file-del.svg">
+          </div>
           <img :src="item.url"
                v-if="calculateIsImg(item.objname)"
                @click="clickImg(item.url)"
@@ -47,7 +51,14 @@
 </template>
 
 <script lang='ts'>
-  import { Component, Vue, Prop, Emit, Model } from "vue-property-decorator";
+  import {
+    Component,
+    Vue,
+    Prop,
+    Emit,
+    Model,
+    Watch
+  } from "vue-property-decorator";
   import { getFileUp, getFileData, getFileDl } from "@/api/sundry";
   import * as dd from "dingtalk-jsapi";
 
@@ -59,24 +70,31 @@
     @Model("change", { type: String, default: "" })
     value: string;
     val: string = this.value || "";
+    @Watch("value")
+    watchVal() {
+      this.val = this.value;
+      this.getFileData();
+    }
+    @Emit("change")
+    changeVal(val) {}
 
     fileData: any[] = [];
-    // imgData:any = {}
 
+    /** 添加附件 */
     addImg(event) {
       if (this.isReadOnly) {
         return;
       }
-      let _file = event.target.files;
-      let _formData = new FormData();
-      let _fileLength = _file.length;
-      if (_fileLength > 0) {
-        for (let i = 0; i < _fileLength; i++) {
-          const element = _file[i];
-          _formData.append(`file${i + 1}`, element);
+      const _FILE_ = event.target.files,
+        _FILE_LENGTH = _FILE_.length;
+      const _FORM_DATA_ = new FormData();
+      if (_FILE_LENGTH > 0) {
+        for (let i = 0; i < _FILE_LENGTH; i++) {
+          const element = _FILE_[i];
+          _FORM_DATA_.append(`file${i + 1}`, element);
         }
       }
-      this.getFileUp(_formData);
+      this.getFileUp(_FORM_DATA_);
     }
 
     getFileUp(file) {
@@ -86,20 +104,20 @@
           if (this.val == "") {
             this.val += _data;
           } else {
-            this.val = this.val + "," + _data;
+            this.val = this.val + _data;
           }
-          this.$emit("change", this.val);
+          this.changeVal(this.val);
           this.getFileData();
         } else {
           this.$toast("附件上传失败!");
         }
-
         //  清除file数据
-        // let _file_dom: any = document.getElementById("fileupload");
-        // _file_dom.value = "";
+        const FileDom: any = document.getElementById("fileupload");
+        FileDom.value = "";
       });
     }
 
+    /** 通过正则验证文件是否为图片 */
     calculateIsImg(n) {
       let name = n,
         regular = /\.jpg|\.svg|\.png/;
@@ -113,18 +131,20 @@
     /** 附件下载 */
     fileDl(url, name) {
       window.open(url);
-
-      // getFileDl(url)
-      //   .then(res => {
-      //     console.log(res);
-      //   })
-      //   .catch(err => {
-      //     console.log(err);
-      //   });
     }
 
+    /** 附件删除 */
+    clickFileDel(i) {
+      const fileStr = this.val,
+        fileArr = fileStr.split(",");
+      fileArr.splice(i, 1);
+      this.changeVal(fileArr.join(","));
+    }
+
+    /** 获取附件数据 */
     getFileData() {
       if (!this.val) {
+        this.fileData = [];
         return false;
       }
       getFileData(this.val)
@@ -137,6 +157,7 @@
         });
     }
 
+    /** 点击图片缩略图  点击查看放大图 */
     clickImg(url) {
       dd.ready(() => {
         dd.biz.util.previewImage({
@@ -149,39 +170,11 @@
     created() {
       this.getFileData();
     }
-
-    // addImg(event) {
-    //   let _file = event.target.files;
-    //   for (let i = 0; i < _file.length; i++) {
-    //     if (this.imgData.length < 9) {
-    //       let obj = {
-    //         url: URL.createObjectURL(_file[i]),
-    //         file: _file[i]
-    //       };
-    //       this.imgData.push(obj);
-    //     } else {
-    //       this.$toast({
-    //         message: "图片上传最多可上传9张",
-    //         duration: 1500
-    //       });
-    //       return;
-    //     }
-    //   }
-    //   //  清除file数据
-    //   let _file_dom: any = document.getElementById("fileupload");
-    //   _file_dom.value = "";
-    // }
-
-    // img_del_click(i) {
-    //   this.imgData.splice(i, 1);
-    // }
   }
 </script>
 
 <style lang='less' scoped>
   .file-box {
-    margin-top: 0.2rem;
-    // padding: 0 0.3rem;
     .file-title {
       font-size: 0.32rem;
       color: #333;
@@ -197,8 +190,15 @@
             height: 0.7rem;
             width: 0.7rem;
           }
+          .btn-box {
+            width: 0.3rem;
+            height: 0.3rem;
+            padding: 0.2rem 0 0 0.2rem;
+            font-size: 0;
+            line-height: 1;
+          }
           .img-describe {
-            margin-left: 1rem;
+            margin: 0 0.6rem 0 1rem;
             height: 0.7rem;
             .name {
               line-height: 0.4rem;
@@ -217,17 +217,6 @@
         width: 0.9rem;
         height: 0.9rem;
         margin: 0 0.2rem 0.2rem 0;
-      }
-
-      .img-del {
-        position: absolute;
-        top: -0.1rem;
-        right: -0.1rem;
-        width: 12px;
-        height: 12px;
-        background: url("../assets/img/img-del.png") no-repeat;
-        background-size: 100%;
-        z-index: 999;
       }
     }
   }

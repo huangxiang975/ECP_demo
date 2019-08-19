@@ -4,15 +4,23 @@
     <div class="approver-list p-r"
          v-for="(item, index) in pageData"
          :key="index">
-      <div class="approver-img ov-h fl">
+      <div class="approver-img ov-h fl clearfloat">
         <img :src="item.touxiang"
              class="fl">
       </div>
-      <div class="time fr">{{item.optdate}}&nbsp;{{item.opttime}}</div>
+      <div class="approver-main">
+        <div class="list-head">
+          {{item.objname}}({{item.objname2}})
+          <span class="list-time fr">{{item.optdate+ " " + item.opttime}}</span>
+        </div>
+        <div class="list-user">{{item.objname1}}</div>
+        <div class="list-opinion">{{item.optdesc}}</div>
+      </div>
+      <!-- <div class="time fr">{{item.optdate}}&nbsp;{{item.opttime}}</div>
       <div class="approver-content">
         <div class="type">{{item.objname}}({{item.objname2}})</div>
         <div class="name ellipsis">{{item.objname1}}</div>
-      </div>
+      </div> -->
     </div>
     <div class="approver-list now-approver p-r"
          v-if="nowApprover.length > 0">
@@ -67,6 +75,8 @@
     loadData() {
       getApprover(this.processId)
         .then(res => {
+          console.log(res);
+
           this.pageData = [...res.data.wflog];
           this.nowApprover = [...res.data.daiban];
         })
@@ -87,34 +97,39 @@
     margin: 0.2rem 0;
     .approver-list {
       padding: 0 0.3rem;
-      height: 0.66rem;
+      min-height: 0.66rem;
       .approver-img {
         width: 0.66rem;
         height: 0.66rem;
+        margin-right: -0.8rem;
         border-radius: 50%;
       }
-      .approver-content {
-        height: 100%;
-        margin-left: 1rem;
-        .type {
+      .approver-main {
+        margin-left: 0.8rem;
+        .list-head {
+          height: 0.4rem;
           line-height: 0.4rem;
+          vertical-align: bottom;
           font-size: 0.3rem;
           color: #333;
+          .list-time {
+            height: 0.4rem;
+            line-height: 0.4rem;
+            font-size: 0.22rem;
+            color: #999;
+          }
         }
-        .name {
+        .list-user {
+          height: 0.4rem;
+          line-height: 0.4rem;
+          font-size: 0.24rem;
+          color: #333;
+        }
+        .list-opinion {
+          line-height: 0.3rem;
           font-size: 0.24rem;
           color: #999;
         }
-        .already-approver {
-          line-height: 0.66rem;
-          font-size: 0.24rem;
-          color: #999;
-        }
-      }
-      .time {
-        line-height: 0.66rem;
-        font-size: 0.22rem;
-        color: #999;
       }
     }
     .now-approver {
@@ -150,21 +165,25 @@
         }
       }
     }
+    .approver-list {
+      padding-bottom: 0.8rem;
+    }
     .approver-list::after {
       content: "";
       position: absolute;
-      // top: 0.72rem;
+      top: 0.66rem;
       left: 0.6rem;
       width: 0.04rem;
-      height: 0.72rem;
+      height: calc(100% - 0.8rem);
       background-color: #e5e5e5;
+    }
+    .approver-list:last-of-type {
+      top: 0;
+      padding-bottom: 0;
     }
     .approver-list:last-of-type::after {
       content: "";
       display: none;
-    }
-    .approver-list + .approver-list {
-      padding-top: 0.82rem;
     }
   }
 </style>

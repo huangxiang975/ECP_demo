@@ -41,7 +41,6 @@
   import { Component, Vue } from "vue-property-decorator";
   import hCell from "@/components/h-cell/index.vue";
   import hCellHead from "@/components/h-cell-head/index.vue";
-  import fileUp from "@/components/fileUp.vue";
   import hExamine from "@/components/examine.vue";
   import ecpUtils from "@/utils/ecpUtils";
   import approver from "./components/approver.vue";
@@ -54,7 +53,6 @@
     components: {
       hCell,
       hCellHead,
-      fileUp,
       hExamine,
       approver,
       bottomBtn,
